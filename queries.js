@@ -12,7 +12,7 @@ async function run() {
     const db = client.db('plp_bookstore');
     const books = db.collection('books');
 
-    // --- Basic CRUD ---
+    //-- Basic CRUD 
 
     // Find all books in genre "Finance"
     const financeBooks = await books.find({ genre: "Finance" }).toArray();
@@ -37,7 +37,7 @@ async function run() {
     const deleteResult = await books.deleteOne({ title: "The Alchemist" });
     console.log("Delete result:", deleteResult.deletedCount);
 
-    // --- Advanced Queries ---
+    //-- Advanced Queries 
 
     // Books in stock and published after 2010
     const filteredBooks = await books.find({ in_stock: true, published_year: { $gt: 2010 } }).toArray();
@@ -63,7 +63,7 @@ async function run() {
     const page2 = await books.find().skip(5).limit(5).toArray();
     console.log("Page 2 (5 books):", page2);
 
-    // --- Aggregation Pipelines ---
+    // -- Aggregation Pipelines
 
     // Average price by genre
     const avgPriceByGenre = await books.aggregate([
@@ -97,7 +97,7 @@ async function run() {
     ]).toArray();
     console.log("Books grouped by decade:", booksByDecade);
 
-    // --- Indexing ---
+    // -- Indexing
 
     // Create index on title
     const idx1 = await books.createIndex({ title: 1 });
